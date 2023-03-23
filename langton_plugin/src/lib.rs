@@ -21,7 +21,7 @@ impl LangtonPlugin {
 
         commands.insert_resource(tile_map);
         commands.insert_resource(Ant {
-            coordinates: Coordinates { x: 100, y: 100 },
+            coordinates: Coordinates { x: 500, y: 500 },
             direction: Direction::North,
         });
     }

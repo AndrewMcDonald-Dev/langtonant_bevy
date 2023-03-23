@@ -21,7 +21,7 @@ pub fn ant_movement(mut tile_map: ResMut<TileMap>, mut ant: ResMut<Ant>, mut com
                         custom_size: Some(Vec2::splat(2.)),
                         ..Default::default()
                     },
-                    transform: Transform::from_xyz(coordinates.x as f32, coordinates.y as f32, 2.),
+                    transform: Transform::from_xyz(coordinates.x  as f32 - 500., coordinates.y as f32 - 500., 2.),
                     ..Default::default()
                 })
                 .insert(Name::new(format!(
@@ -46,24 +46,24 @@ pub fn ant_movement(mut tile_map: ResMut<TileMap>, mut ant: ResMut<Ant>, mut com
         Direction::North => {
             ant.coordinates = Coordinates {
                 x: ant.coordinates.x,
-                y: (ant.coordinates.y + 2 + 500) % 500,
+                y: (ant.coordinates.y + 2 + 1000) % 1000,
             }
         }
         Direction::South => {
             ant.coordinates = Coordinates {
                 x: ant.coordinates.x,
-                y: (ant.coordinates.y + 500 - 2) % 500,
+                y: (ant.coordinates.y + 1000 - 2) % 1000,
             }
         }
         Direction::East => {
             ant.coordinates = Coordinates {
-                x: (ant.coordinates.x + 2 + 500) % 500,
+                x: (ant.coordinates.x + 2 + 1000) % 1000,
                 y: ant.coordinates.y,
             }
         }
         Direction::West => {
             ant.coordinates = Coordinates {
-                x: (ant.coordinates.x + 500 - 2) % 500,
+                x: (ant.coordinates.x + 1000 - 2) % 1000,
                 y: ant.coordinates.y,
             }
         }

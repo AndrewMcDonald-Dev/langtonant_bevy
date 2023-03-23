@@ -1,6 +1,6 @@
 use bevy::{
     diagnostic::{FrameTimeDiagnosticsPlugin, LogDiagnosticsPlugin},
-    prelude::*,
+    prelude::*, window::PresentMode,
 };
 use langton_plugin::LangtonPlugin;
 
@@ -16,6 +16,7 @@ fn main() {
             title: "Langton's Ant".to_string(),
             resolution: (WINDOW_HEIGHT, WINDOW_WIDTH).into(),
             fit_canvas_to_parent: true,
+            present_mode: PresentMode::AutoNoVsync,
             ..Default::default()
         }),
         ..Default::default()
