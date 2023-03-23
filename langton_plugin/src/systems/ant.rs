@@ -10,6 +10,9 @@ pub fn ant_movement(mut tile_map: ResMut<TileMap>, mut ant: ResMut<Ant>, mut com
     let coordinates = ant.coordinates;
     let tile = tile_map.at(coordinates);
     ant.change_direction(tile.clone());
+    let tile_map_height = tile_map.height();
+    let tile_map_width = tile_map.width();
+    let tile_map_sim = tile_map.sim_size();
 
     //Toggle color of Sprite
     match tile {
@@ -18,10 +21,10 @@ pub fn ant_movement(mut tile_map: ResMut<TileMap>, mut ant: ResMut<Ant>, mut com
                 .spawn(SpriteBundle {
                     sprite: Sprite {
                         color: Color::BLACK,
-                        custom_size: Some(Vec2::splat(2.)),
+                        custom_size: Some(Vec2::splat(tile_map_sim as f32)),
                         ..Default::default()
                     },
-                    transform: Transform::from_xyz(coordinates.x  as f32 - 500., coordinates.y as f32 - 500., 2.),
+                    transform: Transform::from_xyz(coordinates.x  as f32 - (tile_map.width() / 2) as f32, coordinates.y as f32 - (tile_map.height() / 2) as f32, 2.),
                     ..Default::default()
                 })
                 .insert(Name::new(format!(
@@ -46,24 +49,24 @@ pub fn ant_movement(mut tile_map: ResMut<TileMap>, mut ant: ResMut<Ant>, mut com
         Direction::North => {
             ant.coordinates = Coordinates {
                 x: ant.coordinates.x,
-                y: (ant.coordinates.y + 2 + 1000) % 1000,
+                y: (ant.coordinates.y + tile_map_sim + tile_map_height) % tile_map_height,
             }
         }
         Direction::South => {
             ant.coordinates = Coordinates {
                 x: ant.coordinates.x,
-                y: (ant.coordinates.y + 1000 - 2) % 1000,
+                y: (ant.coordinates.y + tile_map_height- tile_map_sim) % tile_map_height,
             }
         }
         Direction::East => {
             ant.coordinates = Coordinates {
-                x: (ant.coordinates.x + 2 + 1000) % 1000,
+                x: (ant.coordinates.x + tile_map_sim + tile_map_width) % tile_map_width,
                 y: ant.coordinates.y,
             }
         }
         Direction::West => {
             ant.coordinates = Coordinates {
-                x: (ant.coordinates.x + 1000 - 2) % 1000,
+                x: (ant.coordinates.x + tile_map_width - tile_map_sim) % tile_map_width,
                 y: ant.coordinates.y,
             }
         }

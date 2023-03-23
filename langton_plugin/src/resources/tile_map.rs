@@ -7,10 +7,11 @@ use crate::components::Coordinates;
 use std::ops::{Deref, DerefMut};
 #[derive(Debug, Clone)]
 pub struct TileMap {
-    height: u32,
-    width: u32,
+    height: u16,
+    width: u16,
     map: Vec<Vec<Tile>>,
     pub covered_tiles: HashMap<Coordinates, Entity>,
+    sim_size: u16
 }
 
 #[derive(Debug, Clone)]
@@ -20,7 +21,7 @@ pub enum Tile {
 }
 
 impl TileMap {
-    pub fn empty(width: u32, height: u32) -> Self {
+    pub fn empty(width: u16, height: u16, sim_size: u16) -> Self {
         let map = (0..height)
             .map(|_| (0..width).map(|_| Tile::White).collect())
             .collect();
@@ -30,6 +31,7 @@ impl TileMap {
             width,
             map,
             covered_tiles: HashMap::new(),
+            sim_size
         }
     }
 
@@ -46,11 +48,14 @@ impl TileMap {
         self.map[coordinates.y as usize][coordinates.x as usize].clone()
     }
 
-    pub fn _width(&self) -> u32 {
+    pub fn width(&self) -> u16 {
         self.width
     }
-    pub fn height(&self) -> u32 {
+    pub fn height(&self) -> u16 {
         self.height
+    }
+    pub fn sim_size(&self) -> u16 {
+        self.sim_size
     }
 }
 

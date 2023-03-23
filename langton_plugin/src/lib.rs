@@ -17,7 +17,7 @@ impl Plugin for LangtonPlugin {
 
 impl LangtonPlugin {
     pub fn create_board(mut commands: Commands) {
-        let tile_map = TileMap::empty(1000, 1000);
+        let tile_map = TileMap::empty(1000, 1000, 10);
 
         commands.insert_resource(tile_map);
         commands.insert_resource(Ant {
