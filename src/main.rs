@@ -1,4 +1,7 @@
-use bevy::prelude::*;
+use bevy::{
+    diagnostic::{FrameTimeDiagnosticsPlugin, LogDiagnosticsPlugin},
+    prelude::*,
+};
 use langton_plugin::LangtonPlugin;
 
 const WINDOW_HEIGHT: f32 = 1000.;
@@ -17,6 +20,8 @@ fn main() {
         }),
         ..Default::default()
     }));
+    app.add_plugin(LogDiagnosticsPlugin::default());
+    app.add_plugin(FrameTimeDiagnosticsPlugin::default());
 
     app.add_startup_system(camera_setup);
 

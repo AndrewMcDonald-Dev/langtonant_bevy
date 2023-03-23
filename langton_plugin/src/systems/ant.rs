@@ -46,24 +46,24 @@ pub fn ant_movement(mut tile_map: ResMut<TileMap>, mut ant: ResMut<Ant>, mut com
         Direction::North => {
             ant.coordinates = Coordinates {
                 x: ant.coordinates.x,
-                y: ((ant.coordinates.y + 2) + 500) % 500,
+                y: (ant.coordinates.y + 2 + 500) % 500,
             }
         }
         Direction::South => {
             ant.coordinates = Coordinates {
                 x: ant.coordinates.x,
-                y: ((ant.coordinates.y - 2) + 500) % 500,
+                y: (ant.coordinates.y + 500 - 2) % 500,
             }
         }
         Direction::East => {
             ant.coordinates = Coordinates {
-                x: ((ant.coordinates.x + 2) + 500) % 500,
+                x: (ant.coordinates.x + 2 + 500) % 500,
                 y: ant.coordinates.y,
             }
         }
         Direction::West => {
             ant.coordinates = Coordinates {
-                x: ((ant.coordinates.x - 2) + 500) % 500,
+                x: (ant.coordinates.x + 500 - 2) % 500,
                 y: ant.coordinates.y,
             }
         }
